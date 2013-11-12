@@ -1,0 +1,58 @@
+<apex:page standardController="qPeople__c" extensions="qPeopleListExtension" title="jQuery Table Sort, Filter and Pagination" showHeader="true" standardStylesheets="true">
+<!--apex:composition template="{!$Site.Template}">
+  <apex:define name="body"-->
+  <head>
+    <apex:includeScript value="{!URLFOR($Resource.jQuery, '/jQuery/js/jquery.js')}"  />
+    <apex:includeScript value="{!URLFOR($Resource.jQuery, '/jQuery/js/advancedtable_v2.js')}"  />
+    
+    <apex:stylesheet value="{!URLFOR($Resource.jQuery, '/jQuery/css/advancedtable.css')}"  />
+  </head>
+  <apex:form >
+    <apex:pageBlock title="People" id="qPeopleSection" rendered="true">
+        <script language="javascript" type="text/javascript">
+            $().ready(function() {
+                $("#searchtable").show();
+                $("#table1").advancedtable({searchField: "#search", loadElement: "#loader",sorting: true,rowsPerPage: 50, searchCaseSensitive: false, ascImage: "{!URLFOR($Resource.jQuery, '/jQuery/images/up.png')}", descImage: "{!URLFOR($Resource.jQuery, '/jQuery/images/down.png')}", searchOnField: "#searchOn"});
+            });
+        </script>
+        <table width="100%" class="normal" id="searchtable" border="0" cellspacing="4" cellpadding="0" style="display:none;">
+            <tr>
+                <td width="37%">Search / Filter:  <select id="searchOn" name="searchOn" style="display:none;"/>&nbsp;&nbsp;<input name="search" type="text" id="search" style="display:none;" /></td>
+                <td width="63%"><div id="loader" style="display:none;"><img src="{!URLFOR($Resource.jQuery, '/jQuery/images/loader.gif')}" alt="Loader" /></div></td>
+            </tr>
+        </table>
+        <table  width="100%" id="table1" class="advancedtable" border="0" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <th style="text-align:left;">First Name</th>
+                <th style="text-align:left;">Last Name</th>
+                <th style="text-align:left;">Company</th>
+                <th style="text-align:left;">Address</th>
+                <th style="text-align:left;">City</th>
+                <th style="text-align:left;">State</th>
+                <th style="text-align:left;">Zip</th>
+                <th style="text-align:left;">Email</th>
+                <th style="text-align:left;">Phone</th>
+               </tr>
+            </thead>
+            <tbody>            
+                <apex:repeat var="q" value="{!qPeopleList}">
+                    <tr>
+                        <td style="padding-left:5px;text-align:left;">{!q.First_Name__c}</td>
+                        <td style="padding-left:5px;text-align:left;">{!q.Last_Name__c}</td>
+                        <td style="padding-left:5px;text-align:left;">{!q.Company_Name__c}</td>
+                        <td style="padding-left:5px;text-align:left;">{!q.Address__c}</td>
+                        <td style="padding-left:5px;text-align:left;">{!q.City__c}</td>
+                        <td style="padding-left:5px;text-align:left;">{!q.State__c}</td>
+                        <td style="padding-left:5px;text-align:left;">{!q.zip__c}</td>
+                        <td style="padding-left:5px;text-align:left;">{!q.Email__c}</td>
+                        <td style="padding-left:5px;text-align:left;">{!q.Phone__c}</td>
+                    </tr>
+                </apex:repeat> 
+            </tbody>
+        </table>
+    </apex:pageBlock>
+  </apex:form>
+  <!--/apex:define> 
+ </apex:composition-->
+</apex:page>
